@@ -10,7 +10,8 @@ namespace CityInfo.API.Entities
     {
         public CityInfoContext(DbContextOptions<CityInfoContext> options) : base(options)
         {
-            Database.EnsureCreatedAsync();
+            //Database.EnsureCreatedAsync();
+            Database.Migrate();
         }
 
         public DbSet<City> Cities { get; set; }

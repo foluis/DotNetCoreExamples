@@ -11,9 +11,8 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "environmentVariables": {
-        "ESPECIAL": "Yes",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+      "environmentVariables": {        
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "CityInfo.API": {

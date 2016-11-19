@@ -26,7 +26,8 @@ namespace CityInfo.API
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appSettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                .AddJsonFile($"appSettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
 
             Configuration = builder.Build();
         }
@@ -54,7 +55,8 @@ namespace CityInfo.API
             services.AddTransient<IMailService,CloudMailService>();
 #endif
 
-            var connectionString = @"Data Source=FCXLFFOREROG\SqlServer2012;Initial Catalog=CityInfo;persist security info=True;user id=sa;password=Software1";
+            //var connectionString = @"Data Source=FCXLFFOREROG\SqlServer2012;Initial Catalog=CityInfo;persist security info=True;user id=sa;password=Software1";
+            var connectionString = Startup.Configuration["connectionStrings:CityInfoContext"];
             services.AddDbContext<CityInfoContext>(o => o.UseSqlServer(connectionString));
         }
 
