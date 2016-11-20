@@ -14,6 +14,7 @@ using CityInfo.API.Services;
 using Microsoft.Extensions.Configuration;
 using CityInfo.API.Entities;
 using Microsoft.EntityFrameworkCore;
+using CityInfo.API.Models;
 
 namespace CityInfo.API
 {
@@ -58,6 +59,8 @@ namespace CityInfo.API
             //var connectionString = @"Data Source=FCXLFFOREROG\SqlServer2012;Initial Catalog=CityInfo;persist security info=True;user id=sa;password=Software1";
             var connectionString = Startup.Configuration["connectionStrings:CityInfoContext"];
             services.AddDbContext<CityInfoContext>(o => o.UseSqlServer(connectionString));
+
+            services.AddScoped<ICityInfoRepository, CityInfoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +87,14 @@ namespace CityInfo.API
             }
 
             app.UseStatusCodePages();
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<City, CityWithoutPointOfInterestDto>();
+                cfg.CreateMap<City, CityDto>();
+                cfg.CreateMap<PointOfInterest, PointOfInterestDto>();
+                cfg.CreateMap<PointOfInterestForCreationDto, PointOfInterest>();
+            });
 
             //app.Run( (context) =>
             //{;
