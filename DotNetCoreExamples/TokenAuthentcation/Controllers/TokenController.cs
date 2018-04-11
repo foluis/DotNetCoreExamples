@@ -13,6 +13,8 @@ using Microsoft.IdentityModel.Tokens;
 
 //Explicación: https://auth0.com/blog/securing-asp-dot-net-core-2-applications-with-jwts/
 
+// Siguiente: https://jonhilton.net/2017/10/11/secure-your-asp.net-core-2.0-api-part-1---issuing-a-jwt/
+
 namespace TokenAuthentcation.Controllers
 {
     [Produces("application/json")]
