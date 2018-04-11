@@ -28,6 +28,18 @@ namespace ConsoleApp1
                 $"{product.Price}\tCategory: {product.Category}");
         }
 
+        static async Task<Product> GetBooks(string path)
+        {
+            Product product = null;
+            HttpResponseMessage response = await client.GetAsync(path);
+            if (response.IsSuccessStatusCode)
+            {
+                //product = await response.Content.ReadAsAsync<Product>();
+                var contents = await response.Content.ReadAsStringAsync();
+            }
+            return product;
+        }
+
         #region snippet_CreateProductAsync
         static async Task<Uri> CreateProductAsync(Product product)
         {
@@ -85,42 +97,45 @@ namespace ConsoleApp1
         static async Task RunAsync()
         {
             // Update port # in the following line.
-            client.BaseAddress = new Uri("http://localhost:64195/");
+            client.BaseAddress = new Uri("http://localhost:801/");
+            //client.BaseAddress = new Uri("http://localhost:64195/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "Your Oauth token");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNYXJpbyBSb3NzaSIsImVtYWlsIjoibWFyaW8ucm9zc2lAZG9tYWluLmNvbSIsImJpcnRoZGF0ZSI6IjAwMDEtMDEtMDEiLCJqdGkiOiI2OGMwODgzNi0xNTkyLTQzMGItOGRlNS0zZTYzNDhlNGYyNzYiLCJleHAiOjE1MjM0MTE1ODIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjM5MzkvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo2MzkzOS8ifQ.ttPAXrJir-Ss34iArf1p9zzTHkZZ04DveitccUuL5Ss");
             #endregion
 
             try
             {
-                // Create a new product
-                Product product = new Product
-                {
-                    Name = "Gizmo",
-                    Price = 100,
-                    Category = "Widgets"
-                };
+                //// Create a new product
+                //Product product = new Product
+                //{
+                //    Name = "Gizmo",
+                //    Price = 100,
+                //    Category = "Widgets"
+                //};
 
-                var url = await CreateProductAsync(product);
-                Console.WriteLine($"Created at {url}");
+                //var url = await CreateProductAsync(product);
+                //Console.WriteLine($"Created at {url}");
+
+                var x = await GetBooks("api/Books/Get");
 
                 // Get the product
-                product = await GetProductAsync(url.PathAndQuery);
-                ShowProduct(product);
+                //product = await GetProductAsync(url.PathAndQuery);
+                //ShowProduct(product);
 
-                // Update the product
-                Console.WriteLine("Updating price...");
-                product.Price = 80;
-                await UpdateProductAsync(product);
+                //// Update the product
+                //Console.WriteLine("Updating price...");
+                //product.Price = 80;
+                //await UpdateProductAsync(product);
 
-                // Get the updated product
-                product = await GetProductAsync(url.PathAndQuery);
-                ShowProduct(product);
+                //// Get the updated product
+                //product = await GetProductAsync(url.PathAndQuery);
+                //ShowProduct(product);
 
-                // Delete the product
-                var statusCode = await DeleteProductAsync(product.Id);
-                Console.WriteLine($"Deleted (HTTP Status = {(int)statusCode})");
+                //// Delete the product
+                //var statusCode = await DeleteProductAsync(product.Id);
+                //Console.WriteLine($"Deleted (HTTP Status = {(int)statusCode})");
 
             }
             catch (Exception e)

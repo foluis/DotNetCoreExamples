@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenAuthentcation", "TokenAuthentcation\TokenAuthentcation.csproj", "{5D3F12DD-691F-427C-9E15-7C061230C0C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenAuthentcation", "TokenAuthentcation\TokenAuthentcation.csproj", "{5D3F12DD-691F-427C-9E15-7C061230C0C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{00CBC795-D8A8-4799-9646-9C2E291C0EBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{00CBC795-D8A8-4799-9646-9C2E291C0EBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JQueryClient", "JQueryClient\JQueryClient.csproj", "{DF25A781-7018-415A-9C04-0D83701721FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{00CBC795-D8A8-4799-9646-9C2E291C0EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00CBC795-D8A8-4799-9646-9C2E291C0EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00CBC795-D8A8-4799-9646-9C2E291C0EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF25A781-7018-415A-9C04-0D83701721FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF25A781-7018-415A-9C04-0D83701721FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF25A781-7018-415A-9C04-0D83701721FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF25A781-7018-415A-9C04-0D83701721FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

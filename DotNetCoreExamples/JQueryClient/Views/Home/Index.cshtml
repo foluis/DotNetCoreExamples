@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ASP.NET Web API</title>
+    <link href="../../Content/Site.css" rel="stylesheet" />
+    <script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.getJSON("api/items/",
+                function (Data) {
+                    $.each(Data, function (key, val) {
+                        var str = val.name + ': $' + val.cost;
+                        $('<li/>', { text: str })
+                            .appendTo($('#items'));
+                    });
+                });
+        });
+
+        //function show() {
+        //    var Id = $('#itId').val();
+        //    $.getJSON("http://df-1150-01:801/api/Books/Get",
+        //        function (Data) {
+        //            var str = Data.name + ': $' + Data.cost;
+        //            $('#items').text(str);
+        //        })
+        //        .fail(
+        //        function (jqXHR, textStatus, err) {
+        //            $('#items').text('Error: ' + err);
+        //        });
+        //}
+
+        function show() {
+
+            $.ajax({
+                beforeSend: function (request) {
+                    //request.setRequestHeader("Authorization", 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNYXJpbyBSb3NzaSIsImVtYWlsIjoibWFyaW8ucm9zc2lAZG9tYWluLmNvbSIsImJpcnRoZGF0ZSI6IjAwMDEtMDEtMDEiLCJqdGkiOiI2MTE1M2JlZi1lYmUzLTQ3N2YtODkyNC03ODQ2NWNiNTIyNzciLCJleHAiOjE1MjM0MTgwNDAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjM5MzkvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo2MzkzOS8ifQ.qzmMIFNoynbi4KSvBIKHdUKW_IuB4m32JWqhK2Ybv8k');
+                    request.setRequestHeader("Authorization", $('#itId').val());
+                },
+                type: 'GET',
+                url: 'http://df-1150-01:801/api/Books/Get',
+                dataType: 'json',                
+                success: function (data) {
+                    var items = '';
+                    $.each(data, function (i, item) {
+                        var rows = "<tr>"
+                            + "<td class='prtoducttd'>" + item.studentID + "</td>"
+                            + "<td class='prtoducttd'>" + item.studentName + "</td>"
+                            + "<td class='prtoducttd'>" + item.studentAddress + "</td>"
+                            + "</tr>";
+                        $('#tblStudent tbody').append(rows);
+                    });
+                },
+                error: function (ex) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    alert("Message: " + r.Message);
+                    alert("StackTrace: " + r.StackTrace);
+                    alert("ExceptionType: " + r.ExceptionType);
+                }
+            });
+
+        }
+
+        function getValues() {
+
+            $.ajax({
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNYXJpbyBSb3NzaSIsImVtYWlsIjoibWFyaW8ucm9zc2lAZG9tYWluLmNvbSIsImJpcnRoZGF0ZSI6IjAwMDEtMDEtMDEiLCJqdGkiOiIzMjhmYTkxYS01NDEyLTRkMDMtYjYxNy05MDhhOThjNDk4YTQiLCJleHAiOjE1MjM0MDM5NzEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjM5MzkvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo2MzkzOS8ifQ.2JZ4F6I633J1OYQOWsls0gTyLlvFZqXvUoGCmHpHQeE');
+                },
+                type: 'GET',
+                url: 'http://df-1150-01:801/api/values',
+                dataType: 'json',
+                data: { id: '' },
+                success: function (data) {
+                    var items = '';
+                    $.each(data, function (i, item) {
+                        var rows = "<tr>"
+                            + "<td class='prtoducttd'>" + item.studentID + "</td>"
+                            + "<td class='prtoducttd'>" + item.studentName + "</td>"
+                            + "<td class='prtoducttd'>" + item.studentAddress + "</td>"
+                            + "</tr>";
+                        $('#tblStudent tbody').append(rows);
+                    });
+                },
+                error: function (ex) {
+                    var r = jQuery.parseJSON(response.responseText);
+                    alert("Message: " + r.Message);
+                    alert("StackTrace: " + r.StackTrace);
+                    alert("ExceptionType: " + r.ExceptionType);
+                }
+            });
+
+        }
+
+
+
+        //function show() {
+        //    var Id = $('#itId').val();
+        //    $.getJSON("api/items/" + Id,
+        //        function (Data) {
+        //            var str = Data.name + ': $' + Data.cost;
+        //            $('#items').text(str);
+        //        })
+        //        .fail(
+        //        function (jqXHR, textStatus, err) {
+        //            $('#items').text('Error: ' + err);
+        //        });
+        //}
+    </script>
+</head>
+
+<body id="body">
+    <div class="main-content">
+        <div>
+            <h1>Showing All Items </h1>
+            <ul id="items" />
+        </div>
+        <div>
+            <label for="itId">ID:</label>
+            <input type="text" id="itId" size="100" />
+            <br />
+            <br />
+            <input type="button" value="Get books" onclick="show();" />
+            <input type="button" value="Get Values" onclick="getValues();" />
+            <p id="item" />
+        </div>
+    </div>
+</body>
+</html>
